@@ -82,7 +82,7 @@ export class AppointmentService {
 
   updateAppointment(appt: Appointment): Observable<Appointment> {
     return this.http.put<Appointment>(
-      `${this.apiUrl}/Appointment/${appt.id}?${this.emailParam}`,
+      `${this.apiUrl}/Appointment/${appt.Id}?${this.emailParam}`,
       appt,
       sendOptions
     )
@@ -90,7 +90,7 @@ export class AppointmentService {
 
   deleteAppointment(appt: Appointment): Observable<Appointment> {
     return this.http.delete<Appointment>(
-      `${this.apiUrl}/Appointment/${appt.id}?${this.emailParam}`,
+      `${this.apiUrl}/Appointment/${appt.Id}?${this.emailParam}`,
       recvOptions
     )
   }

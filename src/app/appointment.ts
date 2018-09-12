@@ -1,9 +1,9 @@
 export class Appointment {
-    description: string;
-    start: Date;
-    end: Date;
-    notes: string[];
-    party: number[];
-    id: number;
-    providerEmail: string;
+    Description: string;
+    Start: Date;
+    End: Date;
+    Notes: string[];
+    Party: number[];
+    Id: number;
+    ProviderEmail: string;
 }

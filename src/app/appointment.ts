@@ -5,5 +5,5 @@ export class Appointment {
     notes: string[];
     party: number[];
     id: number;
-    providerEmail: "andretuparamorrison@gmail.com";
+    providerEmail: string;
 }

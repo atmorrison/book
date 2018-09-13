@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { HeaderComponent } from './header/header.component';
+import { UserPageComponent } from './user-page/user-page.component';
 
 const routes: Routes = [
 //  { path: "", component: ComponentName  }
-//  { path: "u/522", component: { } }
+  { path: "u/:Id", component: UserPageComponent }
 ];
 
 @NgModule({

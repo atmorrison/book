@@ -45,8 +45,8 @@ export class HeaderComponent implements OnInit {
 
   go(): void {
     if (this.autoUser) {
-      const id = this.autoUser.nativeElement.className;
-      this.router.navigate([`/u/${id}`]);
+      const Id = this.autoUser.nativeElement.className;
+      this.router.navigate([`/u/${Id}`]);
     }
   }
 

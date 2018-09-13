@@ -44,8 +44,10 @@ export class HeaderComponent implements OnInit {
   }
 
   go(): void {
-    const id = this.autoUser.nativeElement.className;
-    this.router.navigate([`/u/${id}`]);
+    if (this.autoUser) {
+      const id = this.autoUser.nativeElement.className;
+      this.router.navigate([`/u/${id}`]);
+    }
   }
 
   ngOnInit(): void {

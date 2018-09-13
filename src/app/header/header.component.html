@@ -10,12 +10,11 @@
       class="form-control border border-secondary border-right-0" 
       (keyup)="search(searchBox.value)" (keyup.enter)="autofill(); go()"
       (focus)="searching=true;search(searchBox.value)" (blur)="searching=false">
-    <span class="input-group-append">
+    <span class="input-group-append" (click)="searchBox.focus()">
       <div class="bg-white border rounded-right border-secondary border-left-0 p-0" 
-        [ngClass]="{'results-returned': (users$ | async)?.length && searching}" (click)="searchBox.focus(); go()"
-        style="cursor: pointer;">
+        [ngClass]="{'results-returned': (users$ | async)?.length && searching}">
         <img class="m-1" src="assets/search.png" alt="" style="width: 32px;">
-    </div>
+      </div>
     </span>
     <ng-container *ngIf="searching">
       <ul class="search-results">

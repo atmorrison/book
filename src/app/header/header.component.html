@@ -5,16 +5,16 @@
   <a class="navbar-brand mr-auto" style="width: 0;" routerLink="">
     <h1 class="display-4">book.</h1>    
   </a>
-  <div class="input-group bg-light float-right w-25" style="max-width: 300px; height: 100px; padding-top: 29px; padding-bottom: 29px; padding-left: 5px; transition: width 0.5s;">
-    <input type="search" class="form-control border border-secondary border-right-0"  placeholder="">
+  <div id="search-box" [ngClass]="{'w-25': !(searching||searchBox.value)}" class="input-group bg-light float-right">
+    <input #searchBox type="search" class="form-control border border-secondary border-right-0" 
+      (keyup)="search(searchBox.value)" (focus)="searching=true" (blur)="searching=false">
     <span class="input-group-append">
       <a class="bg-white border rounded-right border-secondary border-left-0 p-0" routerLink="">
         <img class="m-1" src="assets/search.png" alt="" style="width: 32px">
       </a>
     </span>
     <ul class="search-results">
-      <li class="rounded">Arthur</li>
-      <li class="rounded">Brad</li>
+      <li *ngFor="let user of users$ | async" class="rounded">{{user.Name}}</li>
     </ul>
   </div>
 </nav>

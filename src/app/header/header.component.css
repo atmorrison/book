@@ -15,3 +15,12 @@ ul.search-results li {
     list-style-type: none;
     margin-top: -1px;
 }
+
+#search-box {
+    max-width: 300px; 
+    height: 100px; 
+    padding-top: 29px;
+    padding-bottom: 29px; 
+    padding-left: 5px; 
+    transition: width 0.5s;
+}

@@ -11,9 +11,24 @@ ul.search-results li {
     height: 40px;
     border: 1px solid gray;
     background-color: white;
+    padding: 5px;
+    padding-left: 12px;
     cursor: pointer;
     list-style-type: none;
     margin-top: -1px;
+}
+
+ul.search-results li:first {
+    background-color: lightgray
+}
+
+ul.search-results li:hover {
+    background-color: gray;
+}
+
+ul.search-results li:last-child {
+    border-bottom-left-radius: .25rem !important;
+    border-bottom-right-radius: .25rem !important;
 }
 
 #search-box {
@@ -23,4 +38,13 @@ ul.search-results li {
     padding-bottom: 29px; 
     padding-left: 5px; 
     transition: width 0.5s;
+}
+
+.results-returned {
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+* {
+    box-shadow: none !important;
 }

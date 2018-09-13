@@ -6,15 +6,21 @@
     <h1 class="display-4">book.</h1>    
   </a>
   <div id="search-box" [ngClass]="{'w-25': !(searching||searchBox.value)}" class="input-group bg-light float-right">
-    <input #searchBox type="search" class="form-control border border-secondary border-right-0" 
-      (keyup)="search(searchBox.value)" (focus)="searching=true" (blur)="searching=false">
+    <input #searchBox type="search" [ngClass]="{'results-returned': (users$ | async)?.length && searching}"
+      class="form-control border border-secondary border-right-0" 
+      (keyup)="search(searchBox.value)" (keyup.enter)="autofill(); go()"
+      (focus)="searching=true;search(searchBox.value)" (blur)="searching=false">
     <span class="input-group-append">
-      <a class="bg-white border rounded-right border-secondary border-left-0 p-0" routerLink="">
-        <img class="m-1" src="assets/search.png" alt="" style="width: 32px">
-      </a>
+      <div class="bg-white border rounded-right border-secondary border-left-0 p-0" 
+        [ngClass]="{'results-returned': (users$ | async)?.length && searching}" (click)="searchBox.focus(); go()"
+        style="cursor: pointer;">
+        <img class="m-1" src="assets/search.png" alt="" style="width: 32px;">
+    </div>
     </span>
-    <ul class="search-results">
-      <li *ngFor="let user of users$ | async" class="rounded">{{user.Name}}</li>
-    </ul>
+    <ng-container *ngIf="searching">
+      <ul class="search-results">
+        <li #autoUser class={{user.Id}} *ngFor="let user of users$ | async" (mousedown)="searchBox.value=user.Name; go()">{{user.Name}}</li>
+      </ul>
+    </ng-container>
   </div>
 </nav>

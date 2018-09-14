@@ -16,6 +16,7 @@ ul.search-results li {
     cursor: pointer;
     list-style-type: none;
     margin-top: -1px;
+    z-index: 10000;
 }
 
 ul.search-results li:first {

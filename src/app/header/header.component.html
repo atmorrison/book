@@ -6,7 +6,7 @@
     <h1 class="display-4">book.</h1>    
   </a>
   <app-user-search #searchContainer id="search-container" class="bg-light float-right"
-    [searchIcon]="false" [purpose]="nav"
+    [searchIcon]="true" purpose="nav"
     [ngClass]="{'w-25': !(searchContainer.searching||searchContainer.searchBox.nativeElement.value)}">
   </app-user-search>
 </nav>

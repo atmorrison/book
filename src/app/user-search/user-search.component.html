@@ -4,7 +4,7 @@
       'border-right-0': searchIcon,
       'no-search-icon': !searchIcon
     }"
-    class="form-control border border-secondary" id="search-text"
+    class="form-control border border-secondary" id="search-text" [placeholder]="placeholder"
     (keyup)="search(searchBox.value)" (keyup.enter)="autofill(); go()"
     (focus)="searching=true;search(searchBox.value)" (blur)="searching=false">
   <span *ngIf="searchIcon" class="input-group-append" (click)="searchBox.focus()">
@@ -15,7 +15,9 @@
   </span>
   <ng-container *ngIf="searching">
     <ul class="search-results">
-      <li #autoUser class={{user.Id}} *ngFor="let user of users$ | async" (mousedown)="searchBox.value=user.Name; go()">{{user.Name}}</li>
+      <div *ngFor="let user of users$ | async">
+        <li *ngIf="!inUsers(user)" #autoUser class={{user.Id}} (mousedown)="searchBox.value=user.Name; go()">{{user.Name}}</li>
+      </div>
     </ul>
   </ng-container>
 </div>

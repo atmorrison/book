@@ -15,11 +15,13 @@ import { AppointmentService } from '../appointment.service';
 export class UserSearchComponent implements OnInit {
   users$: Observable<User[]>;
   searching: boolean = false;
+  placeholder: string = "";
   private searchTerms = new Subject<string>();
   @ViewChild('autoUser') autoUser;
   @ViewChild('searchBox') searchBox;
-  @Input('searchIcon') searchIcon;
-  @Input('purpose') purpose;
+  @Input('searchIcon') searchIcon: boolean;
+  @Input('purpose') purpose: string;
+  @Input('users') users: User[];
 
   constructor(
     private apptService: AppointmentService,
@@ -46,16 +48,30 @@ export class UserSearchComponent implements OnInit {
 
   go(): void {
     if (this.autoUser) {
-      const id = this.autoUser.nativeElement.className;
+      const Id = this.autoUser.nativeElement.className;
       if (this.purpose==="nav") {
-        this.router.navigate([`/u/${id}`]);
+        this.router.navigate([`/u/${Id}`]);
       } else if (this.purpose==="add") {
-        
+        this.apptService.getUser(Id)
+          .subscribe(user => {
+            this.users.push(user);
+            this.searchBox.nativeElement.value="";
+          });
       }
     }
   }
 
+  inUsers(searchedUser: User): boolean {
+    for (let user of this.users) {
+      if (searchedUser.Id===user.Id) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   ngOnInit(): void {
+    if (this.purpose==="add") {this.placeholder="Add user..."}
     this.users$ = this.searchTerms.pipe(
       debounceTime(300),
       switchMap((term: string) => this.searchUsers(term)),

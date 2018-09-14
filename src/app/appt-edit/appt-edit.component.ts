@@ -75,23 +75,68 @@ export class ApptEditComponent implements OnInit {
     }
   }
 
+  removeUser(user: User): void {
+    const peopleIndex = this.people.indexOf(user);
+    const partyIndex = this.appointment.Party.indexOf(user.Id);
+    this.appointment.Party.splice(partyIndex, 1);
+    this.people.splice(peopleIndex, 1);
+  }
+
   addNote(): void {
     const noteText = this.newNote.nativeElement.value;
+    this.addingNote=false;
     this.appointment.Notes.push(noteText);
-    this.apptService.updateAppointment(this.appointment)
-      .subscribe(() => this.addingNote=false);
+  }
+
+  deleteNote(index: number): void {
+    this.appointment.Notes.splice(index, 1)
   }
 
   goBack(): void {
-    if (window.history.length > 1) {
-      this.location.back();
-    } else {
-      this.router.navigate([''])
+    const result = confirm("Go back without submitting? All changes will be lost.")
+    if (result) {
+      if (window.history.length > 1) {
+        this.location.back();
+      } else {
+        this.router.navigate([''])
+      }
     }
   }
 
   submit(): void {
-    
+    const start = new Date(
+      this.date.year,
+      this.date.month - 1,
+      this.date.day,
+      this.startTime.hour,
+      this.startTime.minute
+    )
+    const end = new Date(
+      this.date.year,
+      this.date.month - 1,
+      this.date.day,
+      this.endTime.hour,
+      this.endTime.minute
+    )
+    this.appointment.Start = start;
+    this.appointment.End = end;
+
+    this.appointment.Party = this.people.map(user => user.Id);
+
+    this.apptService.updateAppointment(this.appointment)
+      .subscribe(() => this.router.navigate([`/a/${this.appointment.Id}`]))
   }
+
+  deleteAppointment(): void {
+    const result = confirm("Delete appointment? This cannot be undone.");
+    if (result) {
+      this.apptService.deleteAppointment(this.appointment)
+        .subscribe(() => this.router.navigate(['']))
+    }
+  }
+
+  trackByFn(index: any, item: any) {
+    return index;
+ }
 
 }

@@ -3,6 +3,6 @@
 </p>
 <ul>
   <li *ngFor="let appt of appointments">
-    {{appt.Description}}
+    <a routerLink="/a/{{appt.Id}}">{{appt.Description}}</a>
   </li>
 </ul>

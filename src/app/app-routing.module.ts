@@ -6,7 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { ApptPageComponent } from './appt-page/appt-page.component';
 
 const routes: Routes = [
-//  { path: "", component: ComponentName  }
+  { path: "", component: HomeComponent },
   { path: "u/:Id", component: UserPageComponent },
   { path: "a/:Id", component: ApptPageComponent },
 //  { path: "a/:Id/edit", component: ApptEditComponent }

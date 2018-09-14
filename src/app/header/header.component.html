@@ -5,21 +5,6 @@
   <a id="text-logo" class="navbar-brand mr-auto" routerLink="">
     <h1 class="display-4">book.</h1>    
   </a>
-  <div id="search-box" [ngClass]="{'w-25': !(searching||searchBox.value)}" class="input-group bg-light float-right">
-    <input #searchBox type="search" [ngClass]="{'results-returned': (users$ | async)?.length && searching}"
-      class="form-control border border-secondary border-right-0" 
-      (keyup)="search(searchBox.value)" (keyup.enter)="autofill(); go()"
-      (focus)="searching=true;search(searchBox.value)" (blur)="searching=false">
-    <span class="input-group-append" (click)="searchBox.focus()">
-      <div class="bg-white border rounded-right border-secondary border-left-0 p-0" 
-        [ngClass]="{'results-returned': (users$ | async)?.length && searching}">
-        <img class="m-1" src="assets/search.png" alt="" style="width: 32px;">
-      </div>
-    </span>
-    <ng-container *ngIf="searching">
-      <ul class="search-results">
-        <li #autoUser class={{user.Id}} *ngFor="let user of users$ | async" (mousedown)="searchBox.value=user.Name; go()">{{user.Name}}</li>
-      </ul>
-    </ng-container>
-  </div>
+  <app-user-search #searchContainer id="search-container" class="bg-light float-right"
+  [ngClass]="{'w-25': !(searchContainer.searching||searchContainer.searchBox.nativeElement.value)}"></app-user-search>
 </nav>

@@ -39,6 +39,8 @@ export class ApptEditComponent implements OnInit {
        this.apptService.getAppointment(parseInt(params['Id']))
         .subscribe(appt => {
           this.appointment = appt;
+          this.appointment.Start = new Date(this.appointment.Start);
+          this.appointment.End = new Date(this.appointment.End);
           this.setTimes();
           this.getUsers();
         })
@@ -50,18 +52,18 @@ export class ApptEditComponent implements OnInit {
     const end = this.appointment.End;
     this.date = {
       day: start.getDate(),
-      month: start.getMonth(),
+      month: start.getMonth() + 1,
       year: start.getFullYear()
     };
     this.startTime = {
       hour: start.getHours(),
       minute: start.getMinutes(),
-      second: start.getSeconds()
+      second: 0
     };
     this.endTime = {
       hour: end.getHours(),
       minute: end.getMinutes(),
-      second: end.getSeconds()
+      second: 0
     };
   }
 
@@ -86,6 +88,10 @@ export class ApptEditComponent implements OnInit {
     } else {
       this.router.navigate([''])
     }
+  }
+
+  submit(): void {
+    
   }
 
 }

@@ -7,7 +7,8 @@ import { ApptPageComponent } from './appt-page/appt-page.component';
 const routes: Routes = [
 //  { path: "", component: ComponentName  }
   { path: "u/:Id", component: UserPageComponent },
-  { path: "a/:Id", component: ApptPageComponent }
+  { path: "a/:Id", component: ApptPageComponent },
+//  { path: "a/:Id/edit", component: ApptEditComponent }
 ];
 
 @NgModule({

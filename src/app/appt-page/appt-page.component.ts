@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { AppointmentService } from '../appointment.service';
@@ -22,6 +22,8 @@ export class ApptPageComponent implements OnInit {
 
   appointment: Appointment;
   people: User[];
+  addingNote: boolean;
+  @ViewChild('newNote') newNote;
 
   ngOnInit() {
     this.getAppointment();
@@ -46,12 +48,24 @@ export class ApptPageComponent implements OnInit {
     }
   }
 
+  addNote(): void {
+    const noteText = this.newNote.nativeElement.value;
+    this.appointment.Notes.push(noteText);
+    this.apptService.updateAppointment(this.appointment)
+      .subscribe(() => this.addingNote=false);
+  }
+
   goBack(): void {
     if (window.history.length > 1) {
       this.location.back();
     } else {
       this.router.navigate([''])
     }
+  }
+
+  edit(): void {
+    const Id = this.appointment.Id;
+    this.router.navigate([`/a/${Id}/edit`]);
   }
 
 }

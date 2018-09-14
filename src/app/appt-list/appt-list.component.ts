@@ -88,7 +88,7 @@ export class ApptListComponent implements OnInit {
           appt.Start.getMonth(),
           appt.Start.getDate()
         )
-        if (apptDate===currentDate) {
+        if (apptDate.toDateString()===currentDate.toDateString()) {
           this.sortedAppts[this.sortedAppts.length-1].push(appt);
         } else {
           this.sortedAppts[this.sortedAppts.length] = [appt];

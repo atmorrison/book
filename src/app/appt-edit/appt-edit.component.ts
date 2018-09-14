@@ -95,11 +95,7 @@ export class ApptEditComponent implements OnInit {
   goBack(): void {
     const result = confirm("Go back without submitting? All changes will be lost.")
     if (result) {
-      if (window.history.length > 1) {
-        this.location.back();
-      } else {
-        this.router.navigate([''])
-      }
+      this.location.back();
     }
   }
 
@@ -124,7 +120,7 @@ export class ApptEditComponent implements OnInit {
     this.appointment.Party = this.people.map(user => user.Id);
 
     this.apptService.updateAppointment(this.appointment)
-      .subscribe(() => this.router.navigate([`/a/${this.appointment.Id}`]))
+      .subscribe(() => this.location.back())
   }
 
   deleteAppointment(): void {

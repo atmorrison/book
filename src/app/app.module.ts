@@ -11,6 +11,7 @@ import { UserPageComponent } from './user-page/user-page.component';
 import { ApptListComponent } from './appt-list/appt-list.component';
 import { HomeComponent } from './home/home.component';
 import { ApptPageComponent } from './appt-page/appt-page.component';
+import { ApptEditComponent } from './appt-edit/appt-edit.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ApptPageComponent } from './appt-page/appt-page.component';
     UserPageComponent,
     ApptListComponent,
     HomeComponent,
-    ApptPageComponent
+    ApptPageComponent,
+    ApptEditComponent
   ],
   imports: [
     BrowserModule,

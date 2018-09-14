@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
+import { AppointmentService } from '../appointment.service';
+
+import { User } from '../user';
+import { Appointment } from '../appointment';
+
 @Component({
   selector: 'app-appt-list',
   templateUrl: './appt-list.component.html',
@@ -7,9 +12,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ApptListComponent implements OnInit {
 
-  constructor() { }
+  constructor(private apptService: AppointmentService) { }
 
   ngOnInit() {
+    this.getAppointments();
   }
 
+  appointments: Appointment[];
+
+  getAppointments(): void {
+    this.apptService.getAppointments()
+      .subscribe(appts => this.appointments = appts);
+  }
 }

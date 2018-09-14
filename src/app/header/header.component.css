@@ -48,3 +48,13 @@ ul.search-results li:last-child {
 * {
     box-shadow: none !important;
 }
+
+@media screen and (max-width: 450px) {
+    #search-box {
+        max-width: 100%;
+    }
+
+    #text-logo {
+        width: 0;
+    }
+}

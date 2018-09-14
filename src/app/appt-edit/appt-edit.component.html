@@ -64,12 +64,22 @@
   
       <div class="row py-1">
         <div class="col">
-          <span>Party: </span>
-          <span *ngFor="let user of people; last as isLast">
-            <a routerLink="/u/{{user.Id}}">
-              {{user.Name}}{{isLast? '' : ', '}}
-            </a>
-          </span>
+          Party:
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <ul class="pl-0">
+            <div class="input-group">
+              <div class="">
+                <button *ngFor="let user of people" class="btn m-1">
+                  {{user.Name}}  <i class="fa fa-times-circle" style="color: gray"></i>
+                </button>
+              </div>
+            </div>
+
+          </ul>
         </div>
       </div>
   

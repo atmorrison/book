@@ -4,7 +4,7 @@
             <h3 class="pt-1">{{user.Name}}</h3>
         </div>
         <div class="col-sm-6 pb-2">
-            <button class="btn btn-success float-sm-right">Create Appointment</button>
+            <button class="btn btn-success float-sm-right" routerLink="/new/{{user.Id}}" skipLocationChange>Create Appointment</button>
         </div>
     </div>
     <app-appt-list [userId]="user.Id"></app-appt-list>

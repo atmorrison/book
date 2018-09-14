@@ -8,11 +8,11 @@ import { User } from '../user';
 import { Appointment } from '../appointment';
 
 @Component({
-  selector: 'app-appt-edit',
-  templateUrl: './appt-edit.component.html',
-  styleUrls: ['./appt-edit.component.css']
+  selector: 'app-new-appt',
+  templateUrl: './new-appt.component.html',
+  styleUrls: ['./new-appt.component.css']
 })
-export class ApptEditComponent implements OnInit {
+export class NewApptComponent implements OnInit {
 
   constructor(
     private router: Router,
@@ -23,6 +23,7 @@ export class ApptEditComponent implements OnInit {
 
   appointment: Appointment;
   people: User[];
+  originatingId: number;
   addingNote: boolean;
   date: NgbDateStruct;
   startTime: NgbTimeStruct;
@@ -36,14 +37,25 @@ export class ApptEditComponent implements OnInit {
   getAppointment(): void {
     let Id: number;
     this.route.params.subscribe(params => {
-      this.apptService.getAppointment(parseInt(params['Id']))
-        .subscribe(appt => {
-          this.appointment = appt;
-          this.appointment.Start = new Date(this.appointment.Start);
-          this.appointment.End = new Date(this.appointment.End);
-          this.setTimes();
-          this.getUsers();
-        })
+        this.originatingId = parseInt(params['userId']);
+        const now = new Date();
+        const today = new Date(
+          now.getFullYear(),
+          now.getMonth(),
+          now.getDate()
+        )
+        this.appointment = {
+          ProviderEmail: "andretuparamorrison@gmail.com",
+          Start: today,
+          End: today,
+          Notes: [],
+          Description: "",
+          Party: []
+        } as Appointment;
+        console.log(this.appointment)
+        if (this.originatingId!==0) {this.appointment.Party.push(this.originatingId)}
+        this.setTimes();
+        this.getUsers(); 
     });
   }
 
@@ -95,7 +107,11 @@ export class ApptEditComponent implements OnInit {
   goBack(): void {
     const result = confirm("Go back without submitting? All changes will be lost.")
     if (result) {
-      this.location.back();
+      if (this.originatingId===0) {
+        this.router.navigateByUrl("", { skipLocationChange: true });
+      } else {
+        this.router.navigateByUrl(`/u/${this.originatingId}`, { skipLocationChange: true });
+      }
     }
   }
 
@@ -127,16 +143,8 @@ export class ApptEditComponent implements OnInit {
 
     this.appointment.Party = this.people.map(user => user.Id);
 
-    this.apptService.updateAppointment(this.appointment)
-      .subscribe(() => this.location.back())
-  }
-
-  deleteAppointment(): void {
-    const result = confirm("Delete appointment? This cannot be undone.");
-    if (result) {
-      this.apptService.deleteAppointment(this.appointment)
-        .subscribe(() => this.router.navigate(['']))
-    }
+    this.apptService.createAppointment(this.appointment)
+      .subscribe((appt) => this.router.navigate([`/a/${appt.Id}`]))
   }
 
   trackByFn(index: any, item: any) {

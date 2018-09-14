@@ -13,6 +13,7 @@ import { HomeComponent } from './home/home.component';
 import { ApptPageComponent } from './appt-page/appt-page.component';
 import { ApptEditComponent } from './appt-edit/appt-edit.component';
 import { UserSearchComponent } from './user-search/user-search.component';
+import { NewApptComponent } from './new-appt/new-appt.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { UserSearchComponent } from './user-search/user-search.component';
     HomeComponent,
     ApptPageComponent,
     ApptEditComponent,
-    UserSearchComponent
+    UserSearchComponent,
+    NewApptComponent
   ],
   imports: [
     BrowserModule,

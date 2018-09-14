@@ -12,6 +12,7 @@ import { ApptListComponent } from './appt-list/appt-list.component';
 import { HomeComponent } from './home/home.component';
 import { ApptPageComponent } from './appt-page/appt-page.component';
 import { ApptEditComponent } from './appt-edit/appt-edit.component';
+import { UserSearchComponent } from './user-search/user-search.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ApptEditComponent } from './appt-edit/appt-edit.component';
     ApptListComponent,
     HomeComponent,
     ApptPageComponent,
-    ApptEditComponent
+    ApptEditComponent,
+    UserSearchComponent
   ],
   imports: [
     BrowserModule,

@@ -52,7 +52,6 @@ export class NewApptComponent implements OnInit {
           Description: "",
           Party: []
         } as Appointment;
-        console.log(this.appointment)
         if (this.originatingId!==0) {this.appointment.Party.push(this.originatingId)}
         this.setTimes();
         this.getUsers(); 

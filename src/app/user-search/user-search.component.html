@@ -1,0 +1,23 @@
+<div id="search-box" class="input-group">
+  <input #searchBox type="search" [ngClass]="{
+      'results-returned': (users$ | async)?.length && searching,
+      'border-right-0': searchIcon,
+      'no-search-icon': !searchIcon
+    }"
+    class="form-control border border-secondary" id="search-text" [placeholder]="placeholder"
+    (keyup)="search(searchBox.value)" (keyup.enter)="autofill(); go()"
+    (focus)="searching=true;search(searchBox.value)" (blur)="searching=false">
+  <span *ngIf="searchIcon" class="input-group-append" (click)="searchBox.focus()">
+    <div class="bg-white border rounded-right border-secondary border-left-0 p-0" 
+      [ngClass]="{'results-returned': (users$ | async)?.length && searching}">
+      <img class="m-1" src="assets/search.png" alt="" style="width: 32px;">
+    </div>
+  </span>
+  <ng-container *ngIf="searching">
+    <ul class="search-results">
+      <div *ngFor="let user of users$ | async">
+        <li *ngIf="!inUsers(user)" #autoUser class={{user.Id}} (mousedown)="searchBox.value=user.Name; go()">{{user.Name}}</li>
+      </div>
+    </ul>
+  </ng-container>
+</div>

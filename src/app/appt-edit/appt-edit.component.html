@@ -1,0 +1,139 @@
+<div style="padding: 5px">
+    <div class="jumbotron mx-auto mt-3 py-3" *ngIf="appointment && people && people.length>=appointment.Party.length">
+  
+      <div class="row">
+        <div class="col-2">
+          <button class="btn" (click)="goBack()">Back</button>
+        </div>
+        <div class="col-8 text-center">
+          <h4>Edit</h4>
+        </div>
+        <div class="col-2">
+            <button class="btn btn-success float-right" (click)="submit()">Submit</button>
+        </div>
+      </div>
+      
+      <div class="row pt-3">
+        <div class="col">
+          Description:
+        </div>
+      </div>
+
+      <div class="row pt-1 pb-3">
+        <div class="col" style="max-width: 400px;">
+          <input [(ngModel)]="appointment.Description" class="form-control">
+        </div>
+      </div>
+      
+      <div class="row pb-1">
+        <div class="col">
+          Date:
+        </div>
+      </div>
+      <div class="row pb-0">
+        <div class="col">
+            <form class="form-inline">
+                <div class="form-group">
+                  <div class="input-group">
+                    <input class="form-control calendar" placeholder="{{appointment.Start | date:'yyyy-MM-dd'}}"
+                           name="dp" [(ngModel)]="date" ngbDatepicker #d="ngbDatepicker">
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                        <i class="fa fa-calendar"></i>
+                      </button>
+                    </div>
+                  </div>
+              </div>
+            </form>
+        </div>
+      </div>
+
+      <div class="row pb-2">
+        <div class="col">
+          <div>Starts:</div>
+          <ngb-timepicker [(ngModel)]="startTime" [minuteStep]="5"></ngb-timepicker>
+        </div>
+      </div>
+
+      <div class="row pb-2">
+        <div class="col">
+          <div>Ends: </div>
+          <ngb-timepicker [(ngModel)]="endTime" [minuteStep]="5"></ngb-timepicker>
+        </div>
+      </div>
+  
+      <div class="row py-1">
+        <div class="col">
+          Party:
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <ul class="pl-0">
+            <div class="input-group">
+              <div class="">
+                <button *ngFor="let user of people" class="btn mr-2" (click)="removeUser(user)">
+                  {{user.Name}}  <i class="fa fa-times-circle" style="color: gray"></i>
+                </button>
+              </div>
+            </div>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-4" style="z-index: 1; min-width: 215px">
+          <app-user-search [searchIcon]="false" purpose="add" [users]="people"></app-user-search>
+        </div>
+      </div>
+  
+      <hr class="my-2">
+  
+      <div *ngIf="appointment.Notes.length" class="row mb-2">
+        <div class="col" style="z-index:0">
+          Notes:
+        </div>
+      </div>
+  
+      <div *ngFor="let note of appointment.Notes; let i = index; trackBy:trackByFn" class="row pb-2">
+        <div class="col" style="max-width: 400px">
+          <textarea class="form-control" rows="5" 
+            [(ngModel)]=appointment.Notes[i]>
+          </textarea>
+          <i class="fa fa-times-circle" (click)="deleteNote(i)"
+            style="position: absolute; bottom: 2px; right: 20px; font-size: 2em; color:gray; cursor: pointer">
+          </i>
+        </div>
+      </div>
+  
+      <div *ngIf="addingNote"> 
+        <div class="row">
+          <div class="col form-group" style="max-width: 400px">
+            <textarea #newNote class="form-control" rows="5" id="new-note"></textarea>
+            <i class="fa fa-times-circle" (click)="newNote.value=''; addingNote=false;"
+              style="position: absolute; bottom: 2px; right: 20px; font-size: 2em; color:gray; cursor: pointer">
+            </i> 
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <button class="btn btn-success mt-0" (click)="addNote()">Submit</button>
+          </div>
+        </div>  
+      </div>
+  
+      <div *ngIf="!addingNote" class="row mt-2">
+        <div class="col">
+          <button class="btn btn-primary" (click)="addingNote=true">Add note</button>
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col">
+          <button class="btn btn-danger float-right" (click)="deleteAppointment()">Delete appointment</button>
+        </div>
+      </div>
+  
+    </div>
+  </div>

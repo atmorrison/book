@@ -1,0 +1,31 @@
+.appt-list {
+    width: 100%;
+    border: 1px solid gray;
+    padding: 5px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    margin-top: -1px;
+}
+
+.appt-list:first-of-type {
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
+}
+
+.appt-list:last-of-type {
+    border-bottom-left-radius: .25rem;
+    border-bottom-right-radius: .25rem;
+}
+
+.appt-list.appt {
+    cursor: pointer;
+}
+
+.appt-list.appt:hover {
+    background-color: lightgray;
+}
+
+.appt-list.date {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}

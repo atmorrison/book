@@ -1,0 +1,83 @@
+<div style="padding: 5px">
+  <div class="jumbotron mx-auto mt-3 py-3" *ngIf="appointment && appointment.Party.length===people.length">
+
+    <div class="row">
+      <div class="col-2">
+        <button class="btn" (click)="goBack()">Back</button>
+      </div>
+      <div class="col-8 text-center"><h5>Appointment</h5></div>
+      <div class="col-2">
+          <button class="btn btn-secondary float-right" (click)="edit()">Edit</button>
+      </div>
+    </div>
+
+    <div class="row pt-3">
+      <div class="col">
+        <h3>{{appointment.Description}}</h3>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <h5>{{appointment.Start | date:'fullDate'}}</h5>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3 pr-0" style="min-width: 150px; max-width: 150px;">
+        <div>Starts: {{appointment.Start | date:'shortTime'}}</div>
+      </div>
+      <div class="col-md-3 pr-0">
+        <div>Ends: {{appointment.End | date:'shortTime'}}</div>
+      </div>
+    </div>
+
+    <div class="row py-1">
+      <div class="col">
+        <span>Party: </span>
+        <span *ngFor="let user of people; last as isLast">
+          <a routerLink="/u/{{user.Id}}">
+            {{user.Name}}{{isLast? '' : ', '}}
+          </a>
+        </span>
+      </div>
+    </div>
+
+    <hr class="my-2">
+
+    <div *ngIf="notes.length" class="row mb-2">
+      <div class="col">
+        Notes:
+      </div>
+    </div>
+    
+    <div *ngFor="let note of notes" class="row pb-2">
+      <div class="col">
+        - {{note}}
+      </div>
+    </div>
+
+    <div *ngIf="addingNote"> 
+      <div class="row">
+        <div class="col form-group" style="max-width: 400px">
+          <textarea #newNote class="form-control" rows="5" id="new-note"></textarea>
+          <i class="fa fa-times-circle" (click)="newNote.value=''; addingNote=false;"
+            style="position: absolute; bottom: 2px; right: 20px; font-size: 2em; color:gray; cursor: pointer">
+          </i> 
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <button class="btn btn-success mt-0" (click)="addNote()">Submit</button>
+        </div>
+      </div>  
+    </div>
+
+    <div *ngIf="!addingNote" class="row mt-1">
+      <div class="col">
+        <button class="btn btn-primary" (click)="addingNote=true">Add note</button>
+      </div>
+    </div>
+
+  </div>
+</div>

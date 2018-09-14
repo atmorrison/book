@@ -62,6 +62,7 @@ export class UserSearchComponent implements OnInit {
   }
 
   inUsers(searchedUser: User): boolean {
+    if (!this.users) {return false}
     for (let user of this.users) {
       if (searchedUser.Id===user.Id) {
         return true;

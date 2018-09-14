@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { AppointmentService } from '../appointment.service';
 
@@ -12,7 +13,10 @@ import { Appointment } from '../appointment';
 })
 export class ApptListComponent implements OnInit {
 
-  constructor(private apptService: AppointmentService) { }
+  constructor(
+    private router: Router,
+    private apptService: AppointmentService
+    ) { }
 
   ngOnInit() {
     this.getUsers();
@@ -92,6 +96,11 @@ export class ApptListComponent implements OnInit {
         }
       }
     }
+  }
+
+  gotoUser(Id: number, e: Event): void {
+    e.stopPropagation();
+    this.router.navigate([`/u/${Id}`]);
   }
 
 }

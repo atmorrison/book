@@ -1,11 +1,11 @@
 <ng-container *ngFor="let appointments of sortedAppts; let i = index">
-  <div class="row appt-list date bg-info text-white m-0">
+  <div class="row appt-list date bg-info text-white mx-0">
     <div class="col">{{apptDates[i] | date:'fullDate'}}</div>
   </div>
   <div *ngFor="let appt of appointments" routerLink="/a/{{appt.Id}}"
-    class="row appt-list appt m-0">
+    class="row appt-list appt mx-0">
     <div class="col-sm-8">
-      <div class="row m-0">
+      <div class="row mx-0">
         <div class="col-md-7 py-1">
           <h5>{{appt.Description}}</h5>
         </div>
@@ -15,10 +15,10 @@
       </div>
     </div>
     <div class="col-sm-4 py-1">
-      <div class="row m-0">
+      <div class="row mx-0">
         <div class="col">
           <span *ngFor="let Id of appt.Party; last as isLast">
-            <a routerLink="/u/{{Id}}">
+            <a routerLink="/u/{{Id}}" (click)="goToUser(Id, $event)">
               {{getUserById(Id).Name}}{{isLast? '' : ', '}}
             </a>
           </span>  

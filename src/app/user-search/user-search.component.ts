@@ -1,8 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, Subject, of } from 'rxjs';
-import { debounceTime, distinctUntilChanged, switchMap, map, share } from 'rxjs/operators';
+import { debounceTime, switchMap, map, share } from 'rxjs/operators';
 
 import { User } from '../user';
 
@@ -19,6 +18,8 @@ export class UserSearchComponent implements OnInit {
   private searchTerms = new Subject<string>();
   @ViewChild('autoUser') autoUser;
   @ViewChild('searchBox') searchBox;
+  @Input('searchIcon') searchIcon;
+  @Input('purpose') purpose;
 
   constructor(
     private apptService: AppointmentService,
@@ -46,8 +47,11 @@ export class UserSearchComponent implements OnInit {
   go(): void {
     if (this.autoUser) {
       const id = this.autoUser.nativeElement.className;
-      console.log(id);
-      this.router.navigate([`/u/${id}`]);
+      if (this.purpose==="nav") {
+        this.router.navigate([`/u/${id}`]);
+      } else if (this.purpose==="add") {
+        
+      }
     }
   }
 

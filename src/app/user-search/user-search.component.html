@@ -1,9 +1,13 @@
 <div id="search-box" class="input-group">
-  <input #searchBox type="search" [ngClass]="{'results-returned': (users$ | async)?.length && searching}"
-    class="form-control border border-secondary border-right-0" 
+  <input #searchBox type="search" [ngClass]="{
+      'results-returned': (users$ | async)?.length && searching,
+      'border-right-0': searchIcon,
+      'no-search-icon': !searchIcon
+    }"
+    class="form-control border border-secondary" id="search-text"
     (keyup)="search(searchBox.value)" (keyup.enter)="autofill(); go()"
     (focus)="searching=true;search(searchBox.value)" (blur)="searching=false">
-  <span class="input-group-append" (click)="searchBox.focus()">
+  <span *ngIf="searchIcon" class="input-group-append" (click)="searchBox.focus()">
     <div class="bg-white border rounded-right border-secondary border-left-0 p-0" 
       [ngClass]="{'results-returned': (users$ | async)?.length && searching}">
       <img class="m-1" src="assets/search.png" alt="" style="width: 32px;">

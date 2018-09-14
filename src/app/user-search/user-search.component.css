@@ -1,7 +1,7 @@
 ul.search-results {
     position: absolute;
     width: 100%;
-    top: 42px;
+    top: 40px;
     left: 0px;
     padding-left: 0px;
 }
@@ -30,10 +30,18 @@ ul.search-results li:last-child {
     border-bottom-left-radius: .25rem !important;
     border-bottom-right-radius: .25rem !important;
 }
+.no-search-icon {
+    border-top-right-radius: .25rem !important;
+    border-bottom-right-radius: .25rem !important;
+}
 
 .results-returned {
     border-bottom-left-radius: 0 !important;
     border-bottom-right-radius: 0 !important;
+}
+
+#search-text {
+    height: 42px;
 }
 
 * {

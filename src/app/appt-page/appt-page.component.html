@@ -1,3 +1,4 @@
-<p>
-  appt-page works!
-</p>
+<div *ngIf="appointment">
+  <p>{{appointment.Description}}</p>
+  <p>{{appointment.Start}}</p>
+</div>

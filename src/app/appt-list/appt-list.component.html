@@ -1,8 +1,29 @@
-<p>
-  appt-list works!
-</p>
-<ul>
-  <li *ngFor="let appt of appointments">
-    <a routerLink="/a/{{appt.Id}}">{{appt.Description}}</a>
-  </li>
-</ul>
+<ng-container *ngFor="let appointments of sortedAppts; let i = index">
+  <div class="row appt-list date bg-info text-white m-0">
+    <div class="col">{{apptDates[i] | date:'fullDate'}}</div>
+  </div>
+  <div *ngFor="let appt of appointments" routerLink="/a/{{appt.Id}}"
+    class="row appt-list appt m-0">
+    <div class="col-sm-8">
+      <div class="row m-0">
+        <div class="col-md-7 py-1">
+          <h5>{{appt.Description}}</h5>
+        </div>
+        <div class="col-md-5 py-1">
+          {{appt.Start | date:'shortTime'}} - {{appt.End | date:'shortTime'}}
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4 py-1">
+      <div class="row m-0">
+        <div class="col">
+          <span *ngFor="let Id of appt.Party; last as isLast">
+            <a routerLink="/u/{{Id}}">
+              {{getUserById(Id).Name}}{{isLast? '' : ', '}}
+            </a>
+          </span>  
+        </div>
+      </div>     
+    </div>
+  </div>
+</ng-container>

@@ -1,4 +1,45 @@
-<div *ngIf="appointment">
-  <p>{{appointment.Description}}</p>
-  <p>{{appointment.Start}}</p>
+<div style="padding: 5px">
+  <div class="jumbotron w-75 mx-auto mt-3" *ngIf="appointment && appointment.Party.length===people.length">
+
+    <div class="row">
+      <div class="col-2"><a (click)="goBack()">Back</a></div>
+      <div class="col-8 text-center"><h5>Appointment</h5></div>
+      <div class="col-2">
+        <span class="float-right">Edit</span>
+      </div>
+    </div>
+
+    <div class="row pt-3">
+      <div class="col">
+        <h3>{{appointment.Description}}</h3>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <h5>{{appointment.Start | date:'fullDate'}}</h5>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4" style="max-width: 200px;">
+        <span>Starts: {{appointment.Start | date:'shortTime'}}</span>
+      </div>
+      <div class="col-md-4">
+        <span>Ends: {{appointment.End | date:'shortTime'}}</span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <span>Party: </span>
+        <span *ngFor="let user of people; last as isLast">
+          <a routerLink="/u/{{user.Id}}">
+            {{user.Name}}{{isLast? '' : ', '}}
+          </a>
+        </span>
+      </div>
+    </div>
+
+  </div>
 </div>

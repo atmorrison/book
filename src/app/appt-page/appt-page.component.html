@@ -45,23 +45,32 @@
 
     <hr class="my-2">
 
-    <div *ngIf="appointment.Notes.length" class="row mb-2">
+    <div *ngIf="notes.length" class="row mb-2">
       <div class="col">
         Notes:
       </div>
     </div>
-
-    <div *ngFor="let note of appointment.Notes" class="row pb-2">
+    
+    <div *ngFor="let note of notes" class="row pb-2">
       <div class="col">
         - {{note}}
       </div>
     </div>
 
-    <div *ngIf="addingNote" class="row">
-      <div class="col form-group">
-        <textarea #newNote class="form-control" rows="5" style="max-width: 400px" id="new-note"></textarea>
-        <button class="btn btn-success mt-2" (click)="addNote()">Submit</button>
+    <div *ngIf="addingNote"> 
+      <div class="row">
+        <div class="col form-group" style="max-width: 400px">
+          <textarea #newNote class="form-control" rows="5" id="new-note"></textarea>
+          <i class="fa fa-times-circle" (click)="newNote.value=''; addingNote=false;"
+            style="position: absolute; bottom: 2px; right: 20px; font-size: 2em; color:gray; cursor: pointer">
+          </i> 
+        </div>
       </div>
+      <div class="row">
+        <div class="col">
+          <button class="btn btn-success mt-0" (click)="addNote()">Submit</button>
+        </div>
+      </div>  
     </div>
 
     <div *ngIf="!addingNote" class="row mt-1">

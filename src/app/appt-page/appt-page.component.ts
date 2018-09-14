@@ -23,6 +23,7 @@ export class ApptPageComponent implements OnInit {
   appointment: Appointment;
   people: User[];
   addingNote: boolean;
+  notes: string[];
   @ViewChild('newNote') newNote;
 
   ngOnInit() {
@@ -35,6 +36,7 @@ export class ApptPageComponent implements OnInit {
        this.apptService.getAppointment(parseInt(params['Id']))
         .subscribe(appt => {
           this.appointment = appt;
+          this.notes = appt.Notes;
           this.getUsers();
         })
     });
@@ -50,9 +52,12 @@ export class ApptPageComponent implements OnInit {
 
   addNote(): void {
     const noteText = this.newNote.nativeElement.value;
-    this.appointment.Notes.push(noteText);
+    this.appointment.Notes = this.notes.concat([noteText]);
     this.apptService.updateAppointment(this.appointment)
-      .subscribe(() => this.addingNote=false);
+      .subscribe(() => {
+        this.addingNote = false;
+        this.notes = this.appointment.Notes;
+      });
   }
 
   goBack(): void {
